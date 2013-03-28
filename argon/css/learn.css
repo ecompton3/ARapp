@@ -1,0 +1,29 @@
+#infoBox {
+	position: absolute;
+	left: 10px;
+	height: 200px;
+	width:250px;
+	top: 50px;
+	color: black;
+	font-size: 12px;
+}
+
+.learnHeader{
+	display: block;
+	vertical-align: top;
+}
+
+.learnHeader h4 {
+	font-size: 14px;
+	display: inline-block
+}
+
+.learnHeader img {
+	
+	display: inline-block
+}
+
+
+#mainNav .nav  .navLink  a {
+	padding: 12px;
+}

@@ -1,0 +1,20 @@
+.hero-unit {
+	color: black;
+	position: absolute;
+	top: 3%;
+	left:5%;
+	height: 300px;
+	width: 90%;
+	padding: 5px;
+	margin: 0;
+	padding-top: 0;
+	font-size: 14px;
+}
+
+#appName {
+	font-size: 2em;
+}
+
+#mainNav .nav  .navLink  a {
+	padding: 12px;
+}

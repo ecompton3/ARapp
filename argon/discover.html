@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Discover</title>
+
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
+		<link href="css/discover.css" rel="stylesheet" />
+		<link rel="apple-touch-icon" href="images/sample_icon_57x57.png" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta name="arenabled" />
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="bootstrap/js/bootstrap.js"></script>
+		<script>
+			var cssObject, divEl, objCoords = {
+				latitude : 33.778464,
+				longitude : -84.396887
+			}, curCoords = {};
+			
+			navigator.geolocation.getCurrentPosition(GetLocation);
+			var myAppController = {
+				onArgonReady : function() {
+					
+					// To test goto http://artnotart.org/jdbolter/argon2test/placmark.html
+					// create a div
+							   divEl = document.createElement('div');
+		
+					// you have a div now, in devEl. content goes here  
+					// for the simple demo, just a green square with some text
+							   divEl.id = "test2";
+							   divEl.style.width = "100px";
+							   divEl.style.height = "100px";
+							   divEl.style.backgroundColor = "blue";
+							   divEl.style.position = 'absolute';
+							   divEl.style.fontSize = "16px";
+							   divEl.style.WebkitTransform = "scale3d(-1, 1, 1)";
+							   divEl.innerText = "TEST 2";
+					
+					// create a CSS Object in the scene graph
+						   var cssObject2;
+						   cssObject2 = new THREE.CSSObject(divEl); 
+		
+					// the width and height is used to align things.
+					 		cssObject2.width = 100;
+					 		cssObject2.height = 100;
+					 	    cssObject2.position.x = 100.0;
+							cssObject2.position.y = 100.0;
+						   	cssObject2.position.z = -300.0;
+					
+					
+					//attach directly to world. the x-y-z position should be relative to user
+							   
+					ARGON.World.add(cssObject2);
+			   
+					// To test goto http://artnotart.org/jdbolter/argon2test/placmark.html
+					// create a div
+					// create a CSS Object in the scene graph
+					
+					//alert($div.get(0).height() + "");
+					//cssObject = new THREE.CSSObject($div.get(0));
+					// the width and height is used to align things.
+					//cssObject.width = 200;
+					//cssObject.height = 100;
+					//calcLocation();
+
+					//attach directly to world. the x-y-z position should be relative to user
+					
+					//cssObject.position.x = -140.0;
+					//cssObject.position.y = 50.0;
+					//cssObject.position.z = -270.0;
+					//cssObject.style.position = absolute;
+					//cssObject.style.WebkitTransform = "scale3d(-1, 1, 1)";
+					//ARGON.World.add(cssObject);
+					//alert("" + cssObject.position.x);
+					//alert("" + cssObject.position.y);
+					//alert("" + cssObject.position.z);
+
+				}
+			};
+
+			document.addEventListener("AR.DataSetLoadedEvent", myAppController.onDataSetLoaded);
+			document.addEventListener("AR.DataSetActivatedEvent", myAppController.onDataSetActivated);
+			document.addEventListener("AR.ArgonReadyEvent", myAppController.onArgonReady);
+
+			$(document).ready(function() {
+				$('#mainNav').css('margin-top', $(window).height() - 120);
+			});
+
+			function calcLocation() {
+				var location = {};
+				navigator.geolocation.getCurrentPosition(GetLocation);
+				console.log(curCoords);
+
+				location.y = 100;
+				location.x = (objCoords.longitude - curCoords.coords.longitude) * 100000;
+				location.z = (objCoords.latitude - curCoords.coords.latitude) * 100000;
+
+				console.log(location);
+
+				// straight ahead, 0.0 is striaght, negative left, positive right
+
+				updateCssObject(location)
+
+			}
+
+			function GetLocation(location) {
+				//console.log(location);
+				//alert(location.coords.latitude);
+				//alert(location.coords.longitude);
+				//alert(location.coords.accuracy);
+				curCoords = location;
+			}
+
+			function updateCssObject(location) {
+				cssObject.position.x = location.x;
+				cssObject.position.y = location.y;
+				cssObject.position.z = location.z;
+			}
+
+
+			//navigator.geolocation.watchPosition(calcLocation);
+
+		</script>
+	</head>
+	<body>
+
+		<div id="mainNav" class="navbar">
+			<div class="navbar-inner">
+				<ul class="nav">
+					<li class="navLink">
+						<a href="home.html">Home</a>
+					</li>
+					<li class="navLink active">
+						<a href="#">Discover</a>
+					</li>
+					<li class="navLink">
+						<a href="listen.html">Listen</a>
+					</li>
+					<li class="navLink">
+						<a href="learn.html">Learn</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!--	<div style="background-color: blue; width: 100px; height: 100px;">placemarktest</div>  -->
+		<script src="http://argon.gatech.edu/argon_o.js"></script>
+
+	</body>
+
+</html>

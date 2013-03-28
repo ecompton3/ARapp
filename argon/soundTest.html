@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sound Test</title>
+        
+         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
+        <link href="css/listen.css" rel="stylesheet" />
+        <link rel="apple-touch-icon" href="images/sample_icon_57x57.png" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="arenabled" />
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="bootstrap/js/bootstrap.js"></script>
+        <script>
+      
+
+
+            var myAppController =
+            {                   
+                onArgonReady : function()
+                {
+                    // To test goto http://artnotart.org/jdbolter/argon2test/placmark.html
+					// create a div
+							  
+							   var $button = $('#btn1');
+							   var $button2 = $('#btn2');
+					// create a CSS Object in the scene graph
+						//   var cssObject;
+						  // cssObject = new THREE.CSSObject($button2.get(0)); 
+		
+					// the width and height is used to align things.
+					 		//cssObject.width = 20;
+					 	//cssObject.height = 10;
+					// cssObject.position.x = 0;
+						//	cssObject.position.y = 200.0;
+						  // 	cssObject.position.z = -500.0;
+					
+					
+					//attach directly to world. the x-y-z position should be relative to user
+							   
+					//ARGON.World.add(cssObject);
+			   
+					//  it may also be possible to attach the cssOjbect to a geoObject
+		 			//geoObject : null,
+					//near Chocolatte in Decatur
+	            	//geoObject = ARGON.createGeoObject(33.77475836379698, -84.39653720166409, 0);
+		   			//attach to world?
+                 	//geoObject.add( cssObject );
+                 	//ARGON.World.add( geoObject );			   
+							   
+					// Make is a tracked object if you are tracking off a marker. 
+					//		   trackedObject.add (cssObject);
+					
+					
+                }
+
+				// This would be for tracking, for example.
+             	//   onDataSetLoaded : function(event)
+              	//  {
+  				//
+              	//  }
+	
+            };
+          
+            
+            document.addEventListener("AR.DataSetLoadedEvent", myAppController.onDataSetLoaded);
+			document.addEventListener("AR.DataSetActivatedEvent", myAppController.onDataSetActivated);
+			document.addEventListener("AR.ArgonReadyEvent", myAppController.onArgonReady);
+			
+			var context = new webkitAudioContext();
+			// Create a gain node.
+var gainNode = context.createGainNode(),
+ panner = context.createPanner(),
+ objCoords = {latitude: 33.778464, longitude: -84.396887},
+ curCoords = {},
+ playing = false,
+ paused = false;
+navigator.geolocation.getCurrentPosition(GetLocation);
+panner.setPosition(0.0,1.0,0.0);
+	panner.connect(context.destination);
+      var soundBuffer;
+      loadSound("thatsall.mp3");
+       
+function loadSound(url) {
+  var request = new XMLHttpRequest();
+  request.open('GET', url, true);
+  request.responseType = 'arraybuffer';
+
+  // Decode asynchronously
+  request.onload = function() {
+    context.decodeAudioData(request.response, function(buffer) {
+      soundBuffer = buffer;
+      $('.btn').removeAttr('disabled');
+      $('#btn2').removeAttr('disabled');
+     // playSound(soundBuffer);
+    }, function() {
+           console.error('Error!');
+        });
+  }
+  request.send();
+}
+function playSound(buffer) {
+  var source = context.createBufferSource(), // creates a sound source
+  destination = context.destination; //specifies the final destination (the speakers)
+ 
+  // creates a panner to control L/R balance
+  source.buffer = buffer;
+                // tell the source which sound to play
+  
+  
+    source.loop = true;
+    source.connect(gainNode); //connect source to gain node
+    source.noteOn(0); // when the source should start playing
+    gainNode.gain.value = 1; 
+    calcLocation();
+    gainNode.connect(panner);
+    
+
+
+  
+}
+$(document).ready(function() {
+$('.btn-group').css('margin-top',$(window).height() - 150);
+$('#playButton').click(
+function(){
+	alert('been clicked!');
+	if(playing == false)
+	playSound(soundBuffer);
+});
+});
+function calcLocation() {
+	var location = {};
+	navigator.geolocation.getCurrentPosition(GetLocation);
+	console.log(curCoords);
+	//alert(curCoords.coords.latitude);
+	//alert(curCoords.coords.longitude);
+	//alert(curCoords.coords.accuracy);
+		//alert(curCoords.coords.altitude);
+	location.y = 0;
+	location.x = (objCoords.longitude - curCoords.coords.longitude) * 1000;
+	location.z = (objCoords.latitude - curCoords.coords.latitude) * 1000;
+	gainNode.gain.value = 1 - Math.abs(location.z / 10); 
+	console.log(location);
+	
+	// straight ahead, 0.0 is striaght, negative left, positive right
+   
+	panner.setPosition(location.x,location.y,location.z);
+	
+}
+
+function GetLocation(location) {
+	//console.log(location);
+	//alert(location.coords.latitude);
+	//alert(location.coords.longitude);
+	//alert(location.coords.accuracy);
+	curCoords = location;
+}
+navigator.geolocation.watchPosition(calcLocation);
+//console.log(navigator.geolocation);
+	
+			
+        </script>
+    </head>
+    <body>
+    	
+    	<div class="btn-group">
+  <button id="playButton" class="btn" disabled>Play</button>
+  <button id="pauseButton" class="btn">Pause</button>
+  <button class="btn">Back</button>
+</div>
+<div id="mainNav" class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+    	<li class="navLink"><a href="#">Home</a></li>
+      <li class="navLink"><a href="#">Discover</a></li>
+      <li class="navLink active"><a href="#">Listen</a></li>
+      <li class="navLink"><a href="#">Learn</a></li>
+    </ul>
+  </div>
+</div>
+
+    		
+    	
+    	
+        <!--	<div style="background-color: blue; width: 100px; height: 100px;">placemarktest</div>  -->
+        <script src="http://argon.gatech.edu/argon_o.js"></script>
+        
+    </body>
+    
+    
+</html>            
