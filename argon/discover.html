@@ -14,7 +14,7 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="bootstrap/js/bootstrap.js"></script>
 		<script>
-			var cssObject, divEl, objCoords = {
+			var cssObject2, divEl, objCoords = {
 				latitude : 33.778464,
 				longitude : -84.396887
 			}, curCoords = {};
@@ -39,7 +39,7 @@
 							   divEl.innerText = "TEST 2";
 					
 					// create a CSS Object in the scene graph
-						   var cssObject2;
+						   
 						   cssObject2 = new THREE.CSSObject(divEl); 
 		
 					// the width and height is used to align things.
@@ -48,7 +48,9 @@
 					 	    cssObject2.position.x = 100.0;
 							cssObject2.position.y = 100.0;
 						   	cssObject2.position.z = -300.0;
-					
+					cssObject2.width = 200;
+					cssObject2.height = 100;
+					calcLocation();
 					
 					//attach directly to world. the x-y-z position should be relative to user
 							   
@@ -114,9 +116,9 @@
 			}
 
 			function updateCssObject(location) {
-				cssObject.position.x = location.x;
-				cssObject.position.y = location.y;
-				cssObject.position.z = location.z;
+				cssObject2.position.x = location.x;
+				cssObject2.position.y = location.y;
+				cssObject2.position.z = location.z;
 			}
 
 
