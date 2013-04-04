@@ -1,0 +1,24 @@
+<div>
+
+<h1> The Royal Peacock </h1>
+
+
+
+</div>
+
+<div class="info">
+  <div class="learnHeader">
+  	 <img class="img-rounded" src="res/placeHolder.png" />
+     <h4>Media heading 2</h4>
+  </div>  
+  <p>
+Wednesday and Saturday performances were reserved for whites people.
+Cunningham also operated the Royal Hotel and Restaurant for visiting performers 
+unable to stay at 'white hotels'. This building was formerly located next to Big Bethal 
+and is now a parking garage.
+	
+
+
+  </p>
+  
+</div>

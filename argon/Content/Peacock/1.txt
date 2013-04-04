@@ -1,0 +1,18 @@
+<div>
+
+<h1> The Royal Peacock </h1>
+
+
+
+</div>
+
+<div class="info">
+  <div class="learnHeader">
+  	 <img class="img-rounded" src="res/placeHolder.png" />
+     <h4>Media heading 2</h4>
+  </div>  
+  <p>The Royal Peacock was considered one of the finest clubs for African-Americans in the country.
+It was opened in 1937 under a different name, The Top Hat Club. In 1948, Carrie Cunningham
+bought the Top Hat Club and renamed it The Royal Peacock.</p>
+  
+</div>

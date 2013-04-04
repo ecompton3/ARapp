@@ -1,0 +1,28 @@
+<div>
+
+<h1> The Royal Peacock </h1>
+
+
+
+</div>
+
+<div class="info">
+  <div class="learnHeader">
+  	 <img class="img-rounded" src="res/placeHolder.png" />
+     <h4>Media heading 2</h4>
+  </div>  
+  <p>
+
+Aretha Franklin, The Supremes, and Gladys Knight all made their first Atlanta appearances at 
+the Royal Peacock. Otis Redding and Ray Charles appeared there, as well as Cab Calloway and 
+Louis Armstrong. As for blues legends, the club hosted B. B. King,  Muddy Waters,
+Sonny Boy Williamson, and a host of others appeared here. The Royal Peacock  was a jewel of 
+black Atlanta entertainment. and holds a very important place in Atlanta blues and music 
+history. 
+
+	
+
+
+  </p>
+  
+</div>
