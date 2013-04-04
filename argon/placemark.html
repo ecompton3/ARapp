@@ -8,12 +8,19 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
         <meta name="arenabled" />
         <script>
+         var objCoords = {
+			latitude : 33.772291,
+		    longitude : -84.392633
+			}
+			var cssObject;
             var myAppController =
             {                   
                 onArgonReady : function()
                 {
                     // To test goto http://artnotart.org/jdbolter/argon2test/placmark.html
 					// create a div
+						
+						  
 							   var divEl = document.createElement('div');
 		
 					// you have a div now, in devEl. content goes here  
@@ -39,21 +46,39 @@
 					// document.body.appendChild(divEl)		
 							
 					// create a CSS Object in the scene graph
-						   var cssObject;
-						   cssObject = new THREE.CSSObject(divEl); 
+						  
+						  cssObject = new THREE.CSSObject(divEl); 
 		
 					// the width and height is used to align things.
-					 		cssObject.width = 100;
-					 		cssObject.height = 100;
-					 	    cssObject.position.x = 100.0;
-							cssObject.position.y = 100.0;
-						   	cssObject.position.z = -300.0;
+					 		cssObject.width = 10;
+					 		cssObject.height = 10;
+					 	  //  cssObject.position.x = 167;
+							//cssObject.position.y = 50.0;
+						  // 	cssObject.position.z = 157;
+						   
+				
+			//	console.log(curCoords);
+			
+			var location = {y:0,x:0,z:0};
+				var lla = ARGON.geolocation.getLLA();
+var lat = lla.latitude;
+var lon = lla.longitude;
+
+				location.y = 50;
+				
+				location.x = (objCoords.longitude - lon) * 1000000;
+				alert(location.x);
+				location.z = (objCoords.latitude - lat) * 1000000;
+						   cssObject.position.x = location.x;
+				cssObject.position.y = location.y;
+				cssObject.position.z = location.z;
+				alert(cssObject.position.x);
 					
 					
 					//attach directly to world. the x-y-z position should be relative to user
 							   
 					ARGON.World.add(cssObject);
-			   
+			   		
 					//  it may also be possible to attach the cssOjbect to a geoObject
 		 			//  geoObject : null,
 					//  near Chocolatte in Decatur
@@ -77,6 +102,38 @@
             document.addEventListener("AR.DataSetLoadedEvent", myAppController.onDataSetLoaded);
 			document.addEventListener("AR.DataSetActivatedEvent", myAppController.onDataSetActivated);
 			document.addEventListener("AR.ArgonReadyEvent", myAppController.onArgonReady);
+			
+			var time = new Date().getTime();
+    
+         
+
+     function refresh() {
+         var location = {y:0,x:0,z:0};
+				var lla = ARGON.geolocation.getLLA();
+var lat = lla.latitude;
+var lon = lla.longitude;
+
+				location.y = 50;
+				
+				location.x = (objCoords.longitude - lon) * 1000000;
+				//alert(location.x);
+				location.z = (objCoords.latitude - lat) * 1000000;
+						   cssObject.position.x = location.x;
+				cssObject.position.y = location.y;
+				cssObject.position.z = location.z;
+				//alert(cssObject.position.x);
+					
+					
+					//attach directly to world. the x-y-z position should be relative to user
+							   
+					ARGON.World.add(cssObject);
+             setTimeout(refresh, 10000);
+     }
+
+     setTimeout(refresh, 10000);
+			
+
+			
 			
         </script>
     </head>

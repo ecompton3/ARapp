@@ -17,54 +17,22 @@
 		<script>
 			var myAppController = {
 				onArgonReady : function() {
-					// To test goto http://artnotart.org/jdbolter/argon2test/placmark.html
-					// create a div
-
-					//  var $loc1 = $('#loc1');
-
-					// create a CSS Object in the scene graph
-					//	   var cssObject;
-					//	  cssObject = new THREE.CSSObject($loc1.get(0));
-
-					// the width and height is used to align things.
-					//
-					//	 		cssObject.width = 10;
-					// 	cssObject.height = 5;
-					//cssObject.position.x = 0;
-					//	cssObject.position.y = 200.0;
-					//	 cssObject.position.z = -500.0;
-
-					//attach directly to world. the x-y-z position should be relative to user
-
-					//ARGON.World.add(cssObject);
-
-					//  it may also be possible to attach the cssOjbect to a geoObject
-					//	geoObject : null;
-					//near Chocolatte in Decatur
-					//	geoObject = ARGON.createGeoObject(33.778464, -84.396887, 0);
-					//attach to world?
-					//  geoObject.add( cssObject );
-					//  ARGON.World.add( geoObject );
-
-					// Make is a tracked object if you are tracking off a marker.
-					//		   trackedObject.add (cssObject);
-
-				}
-				// This would be for tracking, for example.
-				//   onDataSetLoaded : function(event)
-				//  {
-				//
-				//  }
+					
 
 			};
 
 			document.addEventListener("AR.DataSetLoadedEvent", myAppController.onDataSetLoaded);
 			document.addEventListener("AR.DataSetActivatedEvent", myAppController.onDataSetActivated);
 			document.addEventListener("AR.ArgonReadyEvent", myAppController.onArgonReady);
-
+			var index = 1, NUMINFO = 2;
 			$(document).ready(function() {
 				$('#mainNav').css('margin-top', $(window).height() - 120);
 				getText();
+				$('.nextButton').on('click',function(){
+     
+     getText();
+     
+  });
 				//getText2();
 			});
 
@@ -76,7 +44,11 @@
 			}
 
 			function getText() {
-				var fileLoc = 'res/test.html';
+				var fileLoc = 'res/test'+index+'.html';
+				index++;
+				if(index > NUMINFO) {
+					index = 1;
+				}
 				//$('body.mainBody').append('<div id="loaderBackground"><div id="loaderImage"></div></div>');
 				//var fileLoc = 'res/page1.html';
 				//-----------------------------------------------------------------------
@@ -135,9 +107,13 @@
 		<div id="infoTemplate" style="display:none">
 
 			{{{text}}}
-
+				 
 		</div>
-		<div id="infoBox" class="well well-small"></div>
+		<div id="infoBoxContainer" class="well well-small">
+			<div id="infoBox" ></div>
+			<button class="nextButton">Next &raquo;</button>
+		</div>
+		
 		<div id="mainNav" class="navbar">
 			<div class="navbar-inner">
 				<ul class="nav">

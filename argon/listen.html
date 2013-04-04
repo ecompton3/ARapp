@@ -19,48 +19,7 @@
 
             var myAppController =
             {                   
-                onArgonReady : function()
-                {
-                    // To test goto http://artnotart.org/jdbolter/argon2test/placmark.html
-					// create a div
-							  
-							   var $button = $('#btn1');
-							   var $button2 = $('#btn2');
-					// create a CSS Object in the scene graph
-						//   var cssObject;
-						  // cssObject = new THREE.CSSObject($button2.get(0)); 
-		
-					// the width and height is used to align things.
-					 		//cssObject.width = 20;
-					 	//cssObject.height = 10;
-					// cssObject.position.x = 0;
-						//	cssObject.position.y = 200.0;
-						  // 	cssObject.position.z = -500.0;
-					
-					
-					//attach directly to world. the x-y-z position should be relative to user
-							   
-					//ARGON.World.add(cssObject);
-			   
-					//  it may also be possible to attach the cssOjbect to a geoObject
-		 			//geoObject : null,
-					//near Chocolatte in Decatur
-	            	//geoObject = ARGON.createGeoObject(33.77475836379698, -84.39653720166409, 0);
-		   			//attach to world?
-                 	//geoObject.add( cssObject );
-                 	//ARGON.World.add( geoObject );			   
-							   
-					// Make is a tracked object if you are tracking off a marker. 
-					//		   trackedObject.add (cssObject);
-					
-					
-                }
-
-				// This would be for tracking, for example.
-             	//   onDataSetLoaded : function(event)
-              	//  {
-  				//
-              	//  }
+               
 	
             };
           
@@ -81,7 +40,7 @@ navigator.geolocation.getCurrentPosition(GetLocation);
 panner.setPosition(0.0,1.0,0.0);
 	panner.connect(context.destination);
       var soundBuffer;
-      loadSound("thatsall.mp3");
+      loadSound("RayCharles.mp3");
        
 function loadSound(url) {
   var request = new XMLHttpRequest();
@@ -132,15 +91,18 @@ function(){
 });
 function calcLocation() {
 	var location = {};
-	navigator.geolocation.getCurrentPosition(GetLocation);
+	var location = {y:0,x:0,z:0};
+				var lla = ARGON.geolocation.getLLA();
+var lat = lla.latitude;
+var lon = lla.longitude;
 	console.log(curCoords);
 	//alert(curCoords.coords.latitude);
 	//alert(curCoords.coords.longitude);
 	//alert(curCoords.coords.accuracy);
 		//alert(curCoords.coords.altitude);
 	location.y = 0;
-	location.x = (objCoords.longitude - curCoords.coords.longitude) * 1000;
-	location.z = (objCoords.latitude - curCoords.coords.latitude) * 1000;
+	location.x = (objCoords.longitude - lon) * 1000;
+	location.z = (objCoords.latitude - lat) * 1000;
 	gainNode.gain.value = 1 - Math.abs(location.z / 10); 
 	console.log(location);
 	
@@ -157,9 +119,14 @@ function GetLocation(location) {
 	//alert(location.coords.accuracy);
 	curCoords = location;
 }
-navigator.geolocation.watchPosition(calcLocation);
+//navigator.geolocation.watchPosition(calcLocation);
 //console.log(navigator.geolocation);
-	
+	 function refresh() {
+         calcLocation();
+             setTimeout(refresh, 10000);
+     }
+
+     setTimeout(refresh, 10000);
 			
         </script>
     </head>
@@ -174,9 +141,9 @@ navigator.geolocation.watchPosition(calcLocation);
   <div class="navbar-inner">
     <ul class="nav">
     	<li class="navLink"><a href="home.html">Home</a></li>
-      <li class="navLink"><a href="#">Discover</a></li>
+      <li class="navLink"><a href="discover.html">Discover</a></li>
       <li class="navLink active"><a href="#">Listen</a></li>
-      <li class="navLink"><a href="#">Learn</a></li>
+      <li class="navLink"><a href="learn.html">Learn</a></li>
     </ul>
   </div>
 </div>
