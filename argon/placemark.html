@@ -3,142 +3,105 @@
     <head>
         <title>Argon GeoSpot Demo</title>
         <link rel="stylesheet" href="jslog.css" />
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
+		<link href="css/home.css" rel="stylesheet" />
         <link rel="apple-touch-icon" href="images/sample_icon_57x57.png" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
         <meta name="arenabled" />
-        <script>
-         var objCoords = {
-			latitude : 33.772291,
-		    longitude : -84.392633
-			}
-			var cssObject;
-            var myAppController =
-            {                   
-                onArgonReady : function()
-                {
-                    // To test goto http://artnotart.org/jdbolter/argon2test/placmark.html
-					// create a div
-						
-						  
-							   var divEl = document.createElement('div');
-		
-					// you have a div now, in devEl. content goes here  
-					// for the simple demo, just a green square with some text
-							   divEl.id = "cssContent";
-							   divEl.style.width = "100px";
-							   divEl.style.height = "100px";
-							   divEl.style.backgroundColor = "blue";
-							   divEl.style.position = 'absolute';
-							   divEl.style.fontSize = "16px";
-							   divEl.style.WebkitTransform = "scale3d(-1, 1, 1)";
-							   divEl.innerText = "AR + HTML5";
-		
-					//add an image
-						var oImg = document.createElement('img');
-							oImg.setAttribute('src','http://artnotart.org/jdbolter/decatur/decatur.0000.jpg');	
-							oImg.setAttribute('height','100');	
-							oImg.setAttribute('width','100');	
-							divEl.appendChild(oImg);
-							
-					// This will actually display the div on the screen
-					// be sure to comment out the cssObject to test this
-					// document.body.appendChild(divEl)		
-							
-					// create a CSS Object in the scene graph
-						  
-						  cssObject = new THREE.CSSObject(divEl); 
-		
-					// the width and height is used to align things.
-					 		cssObject.width = 10;
-					 		cssObject.height = 10;
-					 	  //  cssObject.position.x = 167;
-							//cssObject.position.y = 50.0;
-						  // 	cssObject.position.z = 157;
-						   
-				
-			//	console.log(curCoords);
-			
-			var location = {y:0,x:0,z:0};
-				var lla = ARGON.geolocation.getLLA();
-var lat = lla.latitude;
-var lon = lla.longitude;
-
-				location.y = 50;
-				
-				location.x = (objCoords.longitude - lon) * 1000000;
-				alert(location.x);
-				location.z = (objCoords.latitude - lat) * 1000000;
-						   cssObject.position.x = location.x;
-				cssObject.position.y = location.y;
-				cssObject.position.z = location.z;
-				alert(cssObject.position.x);
-					
-					
-					//attach directly to world. the x-y-z position should be relative to user
-							   
-					ARGON.World.add(cssObject);
-			   		
-					//  it may also be possible to attach the cssOjbect to a geoObject
-		 			//  geoObject : null,
-					//  near Chocolatte in Decatur
-	            	//  geoObject = ARGON.createGeoObject(33.791345,-84.305655, 0);
-		   			//  attach to world?
-                 	//  geoObject.add( cssObject );
-                 	//  ARGON.World.add( geoObject );			   
-							   
-					// Make is a tracked object if you are tracking off a marker. 
-					//		   trackedObject.add (cssObject);                    
-                }
-
-				// This would be for tracking, for example.
-             	//   onDataSetLoaded : function(event)
-              	//  {
-  				//
-              	//  }
-	
-            };
-            
-            document.addEventListener("AR.DataSetLoadedEvent", myAppController.onDataSetLoaded);
-			document.addEventListener("AR.DataSetActivatedEvent", myAppController.onDataSetActivated);
-			document.addEventListener("AR.ArgonReadyEvent", myAppController.onArgonReady);
-			
-			var time = new Date().getTime();
-    
-         
-
-     function refresh() {
-         var location = {y:0,x:0,z:0};
-				var lla = ARGON.geolocation.getLLA();
-var lat = lla.latitude;
-var lon = lla.longitude;
-
-				location.y = 50;
-				
-				location.x = (objCoords.longitude - lon) * 1000000;
-				//alert(location.x);
-				location.z = (objCoords.latitude - lat) * 1000000;
-						   cssObject.position.x = location.x;
-				cssObject.position.y = location.y;
-				cssObject.position.z = location.z;
-				//alert(cssObject.position.x);
-					
-					
-					//attach directly to world. the x-y-z position should be relative to user
-							   
-					ARGON.World.add(cssObject);
-             setTimeout(refresh, 10000);
-     }
-
-     setTimeout(refresh, 10000);
-			
-
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="bootstrap/js/bootstrap.js"></script>
+		<script src="js/mustache.js"></script>
+        <script src="js/argonFunctions.js">
+        
 			
 			
         </script>
     </head>
     <body>
-    	
+    	<section id="home" style="display: block;">
+			<div id="appInfo" class="hero-unit">
+				<h1 id="appName">App Name</h1>
+
+				<dl >
+					<dt>
+						Discover
+					</dt>
+					<dd>
+						Pick location
+					</dd>
+					<dt>
+						Listen
+					</dt>
+					<dd>
+						Find the location
+					</dd>
+					<dt>
+						Learn
+					</dt>
+					<dd>
+						Find out more
+					</dd>
+				</dl>
+ 
+			</div>
+		</section>
+		<section id="discover" style="display:none">
+			
+		</section>
+		<section id="listen" style="display:none">
+			<div id="audioIcon" style="position: absolute; top:20px; left: 5px;"></div>
+			<div id="audioButtons" class="btn-group" style="position: absolute; top:320px; left: 60px;">
+				<button id="playButton" class="btn btn-warning" disabled>
+					Play <i class="icon-white icon-play"></i>
+				</button>
+				<button id="pauseButton" class="btn btn-warning">
+					Pause <i class="icon-white icon-pause"></i>
+				</button>
+				<button class="btn btn-warning">
+					Back
+				</button>
+			</div>
+			
+
+		</section>
+		<section id="learn" style="display:none">
+			<div id="infoTemplate" style="display:none">
+ 
+
+				{{{text}}}
+
+			</div>
+			<div id="infoBoxContainer" class="well well-small">
+				<div id="infoBox" ></div>
+				<button class="nextButton btn btn-warning">
+					Next &raquo;
+				</button>
+			</div>
+ 
+			
+		</section>
+    	<div id="mainNav" class="navbar" style="position: relative; margin-top:350px;">
+
+				<div class="navbar-inner">
+					<ul class="nav">
+						<li id="homeLink" class="navLink active">
+							<a class="homeBtn" href="#">Home</a>
+						</li>
+						<li id="discoverLink" class="navLink">
+							<a class="discoverBtn" href="#">Discover</a>
+						</li>
+						<li id="listenLink" class="navLink">
+							<a class="listenBtn" href="#">Listen</a>
+						</li>
+						<li id="learnLink" class="navLink">
+							<a class="learnBtn" href="#">Learn</a>
+						</li>
+					</ul>
+				</div>
+			</div>
         <!--	<div style="background-color: blue; width: 100px; height: 100px;">placemarktest</div>  -->
         <script src="http://argon.gatech.edu/argon_o.js"></script>
     </body>

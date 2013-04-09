@@ -19,7 +19,8 @@
 
 	</head>
 	<body>
-		<section id="home" style="display: block;">
+		
+				<section id="home" style="display: block;">
 			<div id="appInfo" class="hero-unit">
 				<h1 id="appName">App Name</h1>
 
@@ -43,21 +44,22 @@
 						Find out more
 					</dd>
 				</dl>
-
+ 
 			</div>
 		</section>
 		<section id="discover" style="display:none">
 			
 		</section>
 		<section id="listen" style="display:none">
-			<div class="btn-group">
-				<button id="playButton" class="btn" disabled>
-					Play
+			<div id="audioIcon" style="position: absolute; top:20px; left: 5px;"></div>
+			<div id="audioButtons" class="btn-group" style="position: absolute; top:320px; left: 60px;">
+				<button id="playButton" class="btn btn-warning" disabled>
+					Play <i class="icon-white icon-play"></i>
 				</button>
-				<button id="pauseButton" class="btn">
-					Pause
+				<button id="pauseButton" class="btn btn-warning">
+					Pause <i class="icon-white icon-pause"></i>
 				</button>
-				<button class="btn">
+				<button class="btn btn-warning">
 					Back
 				</button>
 			</div>
@@ -66,38 +68,41 @@
 		</section>
 		<section id="learn" style="display:none">
 			<div id="infoTemplate" style="display:none">
+ 
 
 				{{{text}}}
 
 			</div>
 			<div id="infoBoxContainer" class="well well-small">
 				<div id="infoBox" ></div>
-				<button class="nextButton">
+				<button class="nextButton btn btn-warning">
 					Next &raquo;
 				</button>
 			</div>
-
+ 
 			
 		</section>
 		<div id="mainNav" class="navbar" style="position: relative; margin-top:350px;">
 
 				<div class="navbar-inner">
 					<ul class="nav">
-						<li class="navLink active">
+						<li id="homeLink" class="navLink active">
 							<a class="homeBtn" href="#">Home</a>
 						</li>
-						<li class="navLink">
+						<li id="discoverLink" class="navLink">
 							<a class="discoverBtn" href="#">Discover</a>
 						</li>
-						<li class="navLink">
+						<li id="listenLink" class="navLink">
 							<a class="listenBtn" href="#">Listen</a>
 						</li>
-						<li class="navLink">
+						<li id="learnLink" class="navLink">
 							<a class="learnBtn" href="#">Learn</a>
 						</li>
 					</ul>
 				</div>
-			</div>
+ 			</div>
+ 
+
 
 		<!--	<div style="background-color: blue; width: 100px; height: 100px;">placemarktest</div>  -->
 		<script src="http://argon.gatech.edu/argon_o.js"></script>

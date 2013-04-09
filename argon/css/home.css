@@ -1,7 +1,7 @@
 .hero-unit {
-	color: black;
+	color: white;
 	position: absolute;
-	top: 3%;
+	top: 50px;
 	left:5%;
 	height: 300px;
 	width: 90%;
@@ -9,36 +9,77 @@
 	margin: 0;
 	padding-top: 0;
 	font-size: 14px;
+	background: rgb(255,150,5); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  rgba(255,150,5,1) 0%, rgba(219,79,4,1) 69%, rgba(200,20,0,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,150,5,1)), color-stop(69%,rgba(219,79,4,1)), color-stop(100%,rgba(200,20,0,1))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,150,5,1) 0%,rgba(219,79,4,1) 69%,rgba(200,20,0,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(255,150,5,1) 0%,rgba(219,79,4,1) 69%,rgba(200,20,0,1) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(255,150,5,1) 0%,rgba(219,79,4,1) 69%,rgba(200,20,0,1) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(255,150,5,1) 0%,rgba(219,79,4,1) 69%,rgba(200,20,0,1) 100%); /* W3C */
+filter: prog
 }
 
 #appName {
 	font-size: 2em;
 }
 
+#mainNav .navbar-inner{
+	background: rgb(255,150,5); /* Old browsers */
+	background: rgba(219,79,4,1);
+	
+	
+
+
+}
+
 #mainNav .nav  .navLink  a {
 	padding: 12px;
+	color: white;
+	text-shadow: 0 1px 0 #000000;
+} 
+
+#mainNav .nav  .navLink.active a {
+	background-color:#ff8800;
 	
+	
+	
+} 
+
+#audioIcon{
+	
+	width: 32px;
+	height: 32px;
+	background-image : url('../res/audioLow.png');
+	background-size: 100%, 100%;
+	background-repeat: no-repeat;
 }
 
 
 
-.btn-group{
-	position: absolute;
-	top:320px;
-}
 
 #infoBoxContainer {
 	position: absolute;
-	left: 10px;
+	left: 25px;
 	height: 200px;
 	width:250px;
 	top: 50px;
-	color: black;
+	color: white;
+	border-radius:10px;
 	font-size: 12px;
+	background: rgb(255,150,5); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  rgba(255,150,5,1) 0%, rgba(219,79,4,1) 69%, rgba(200,20,0,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,150,5,1)), color-stop(69%,rgba(219,79,4,1)), color-stop(100%,rgba(200,20,0,1))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,150,5,1) 0%,rgba(219,79,4,1) 69%,rgba(200,20,0,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(255,150,5,1) 0%,rgba(219,79,4,1) 69%,rgba(200,20,0,1) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(255,150,5,1) 0%,rgba(219,79,4,1) 69%,rgba(200,20,0,1) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(255,150,5,1) 0%,rgba(219,79,4,1) 69%,rgba(200,20,0,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9605', endColorstr='#c81400',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
 }
 #infoBox {
 	height: 180px;
 	width:250px;
+	
 }
 
 #infoBoxContainer button{
